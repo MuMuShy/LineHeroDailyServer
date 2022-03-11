@@ -7,14 +7,14 @@ def scheduled_job():
     from DataBase import DataBase
     dataBase = DataBase()
     print("12.00過後每日任務重置")
-    dataBase.clearDailyRequest
+    dataBase.clearDailyRequest()
 
-@sched.scheduled_job('cron',minute='*')
-def scheduled_job():
-    from DataBase import DataBase
-    dataBase = DataBase()
-    print("test")
-    print(dataBase.getUserById(0))
+# @sched.scheduled_job('cron',minute='*')
+# def scheduled_job():
+#     from DataBase import DataBase
+#     dataBase = DataBase()
+#     print("test")
+#     print(dataBase.getUserById(0))
 
 
 sched.start()

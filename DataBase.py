@@ -1064,6 +1064,7 @@ class DataBase():
         self.cursor.execute(sql)
         self.conn.commit()
         print("0.00 DAILY CLEAR REQUEST DONE")
+        self.conn.close()
     
     def checkUserPackMaxLoc(self,user_line_id,item_type,item_id):###有修改###
         try:
