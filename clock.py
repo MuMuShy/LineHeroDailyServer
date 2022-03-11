@@ -18,7 +18,7 @@ def scheduled_job_auctioncheck():
     dataBase = DataBase()
     print(":SERVER:-- 拍賣系統檢查 --")
     _auctionlist = dataBase.getAuctionList("weapon")
-    if _auctionlist is not None or len(_auctionlist) == 0:
+    if _auctionlist is None or len(_auctionlist) == 0:
         print(":SERVER:-- 拍賣系統檢查 -- 無架上物品")
     else:
         for auction in _auctionlist:
