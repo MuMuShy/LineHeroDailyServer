@@ -9,7 +9,7 @@ def scheduled_job():
     print("12.00過後每日任務重置")
     dataBase.clearDailyRequest
 
-@sched.scheduled_job('cron', day_of_week='mon-sun',min ='*')
+@sched.scheduled_job('cron',minute='*')
 def scheduled_job():
     from DataBase import DataBase
     dataBase = DataBase()
