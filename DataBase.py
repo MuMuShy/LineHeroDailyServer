@@ -7,7 +7,6 @@ import psycopg2
 from dotenv import load_dotenv
 import time
 from datetime import datetime, timedelta
-from Games import rpgDictionary
 load_dotenv()
 DATABASE_URL = os.environ['DATABASE_URL']
 
