@@ -43,6 +43,23 @@ def scheduled_job_auctioncheck():
                 print(":SERVER: --拍賣系統-- 過期商品: ID:"+str(auction_info["auction_id"])+" 歸還成功")
     print(":SERVER:-- 拍賣系統檢查 -- 完成")
 
+#檢查拍賣場是否有過期拍賣
+@sched.scheduled_job('cron',minute='*')
+def scheduled_job_Bosscheck():
+    print(":SERVER:-- 世界王系統檢查 -- ")
+    from DataBase import DataBase
+    from datetime import datetime, timedelta
+    import math
+    dataBase = DataBase()
+    _bossstatus = dataBase.getWordBossStatus()
+    if _bossstatus is None:
+        print(":SERVER:-- 世界王已消滅 重置")
+        dataBase.startWordBoss(0)
+    else:
+        print(":SERVER:-- 世界王進行傷害check -- ")
+        totaldamage =dataBase.getWordBossNowTotalDamage()
+        print(":SERVER 世界王目前造成傷害:"+str(totaldamage))
+        dataBase.damageWordBoss(totaldamage)
 
 
 sched.start()
