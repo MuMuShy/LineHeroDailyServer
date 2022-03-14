@@ -7,7 +7,6 @@ import psycopg2
 from dotenv import load_dotenv
 import time
 from datetime import datetime, timedelta
-from Games import rpgDictionary
 load_dotenv()
 DATABASE_URL = os.environ['DATABASE_URL']
 
@@ -15,6 +14,9 @@ DATABASE_URL = os.environ['DATABASE_URL']
 class DataBase():
     def __init__(self):
         self.conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    
+    def close(self):
+        self.conn.close()
     
     def checkUser(self,user_line_id):
         try:
