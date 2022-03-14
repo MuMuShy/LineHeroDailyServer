@@ -43,7 +43,35 @@ def scheduled_job_auctioncheck():
                 print(":SERVER: --拍賣系統-- 過期商品: ID:"+str(auction_info["auction_id"])+" 歸還成功")
     print(":SERVER:-- 拍賣系統檢查 -- 完成")
 
-#檢查拍賣場是否有過期拍賣
+#檢查世界王
+@sched.scheduled_job('cron',minute='10')
+def scheduled_job_WordArmycheck():
+    print(":SERVER:-- 世界王系統檢查 遠征軍 -- ")
+    from DataBase import DataBase
+    from datetime import datetime, timedelta
+    import math
+    dataBase = DataBase()
+    _bossstatus = dataBase.getWordBossStatus()
+    if _bossstatus is None:
+        print(":SERVER:-- 世界王已消滅 重置")
+        dataBase.startWordBoss(0)
+    else:
+        print(":SERVER:-- 世界王進行遠征軍傷害檢查 -- ")
+        if _bossstatus["last_word_army"] is None:
+            print("尚未出發過遠征軍 立即出發")
+            dataBase.ArmyDamageWordBoss()
+        else:
+            current =  datetime.now()
+            _lastarmytime = _bossstatus["last_word_army"]
+            _lasttime = datetime.strptime(_lastarmytime,"%m/%d/%Y %H:%M:%S")
+            time_elapsed = (current-_lasttime) #經過的掛機時間
+            time_elapsed = math.floor(time_elapsed.total_seconds())
+            print("經過秒數:"+str(time_elapsed))
+            if time_elapsed >= 3600: #每小時攻擊一次
+                print("遠征軍冷卻時間到 遠征軍出發")
+                dataBase.ArmyDamageWordBoss()
+            print("遠征軍檢查-- 完成")
+
 @sched.scheduled_job('cron',minute='*')
 def scheduled_job_Bosscheck():
     print(":SERVER:-- 世界王系統檢查 -- ")
