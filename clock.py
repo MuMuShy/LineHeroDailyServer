@@ -43,7 +43,7 @@ def scheduled_job_auctioncheck():
                 print(":SERVER: --拍賣系統-- 過期商品: ID:"+str(auction_info["auction_id"])+" 歸還成功")
     print(":SERVER:-- 拍賣系統檢查 -- 完成")
 
-#檢查世界王
+#檢查世界王遠征軍
 @sched.scheduled_job('cron',minute='10')
 def scheduled_job_WordArmycheck():
     print(":SERVER:-- 世界王系統檢查 遠征軍 -- ")
@@ -67,9 +67,11 @@ def scheduled_job_WordArmycheck():
             time_elapsed = (current-_lasttime) #經過的掛機時間
             time_elapsed = math.floor(time_elapsed.total_seconds())
             print("經過秒數:"+str(time_elapsed))
-            if time_elapsed >= 3600: #每小時攻擊一次
+            if time_elapsed >= 3590: #每小時攻擊一次
                 print("遠征軍冷卻時間到 遠征軍出發")
                 dataBase.ArmyDamageWordBoss()
+            else:
+                print("遠征軍還在準備中")
             print("遠征軍檢查-- 完成")
 
 @sched.scheduled_job('cron',minute='*')
