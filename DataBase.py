@@ -1,6 +1,4 @@
-from cgitb import reset
 import os
-from pydoc import describe
 import random
 from unittest import result
 import psycopg2
@@ -2154,11 +2152,13 @@ class DataBase():
             self.conn = psycopg2.connect(DATABASE_URL, sslmode='require')
             self.cursor = self.conn.cursor()
         now_boss_status = self.getWordBossStatus()
+        
         if now_boss_status is None:
             print("目前沒有世界王")
             return None
+        _bossinfo = self.getWordBossInfo(now_boss_status["boss_id"])
         if now_boss_status["hp"] > totaldamage:
-            now_boss_status["hp"] -= totaldamage
+            now_boss_status["hp"] = _bossinfo["boss_hp"] - totaldamage
             sql = "UPDATE word_boss_status SET hp = {hp}".format(hp = now_boss_status["hp"])
             self.cursor.execute(sql)
             self.conn.commit()
