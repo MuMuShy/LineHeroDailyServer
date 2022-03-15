@@ -2228,9 +2228,20 @@ class DataBase():
             #武器得獎主
             _userlist = self.getWordBossUserList()
             weights = []
+            index = 0
+            #前五名直接給武器
             for user in _userlist:
                 self.givePlayerItem(user["user_line_id"],"reel",_reel)
                 weights.append(user["total_damage"])
+                if index < 5:
+                    user_job = self.getUserJob(user["user_line_id"])["job"]
+                    if user_job == "warrior":
+                        self.givePlayerItem(user["user_line_id"],"weapon",23)
+                    elif user_job =="rog":
+                        self.givePlayerItem(user["user_line_id"],"weapon",24)
+                    elif user_job =="majic":
+                        self.givePlayerItem(user["user_line_id"],"weapon",22)
+                    index+=1
             print("總遊戲玩家")
             print(_userlist)
             print("權重:")
