@@ -2,7 +2,6 @@ from cgitb import reset
 import os
 from pydoc import describe
 import random
-from unittest import result
 import psycopg2
 from dotenv import load_dotenv
 import time
@@ -2219,7 +2218,7 @@ class DataBase():
             sql = "UPDATE word_boss_status SET hp = {hp}".format(hp = now_boss_status["hp"])
             self.cursor.execute(sql)
             self.conn.commit()
-        else:
+        elif now_boss_status["hp"] <= totaldamage:
             print("世界boss已陣亡")
             now_boss_status = self.getWordBossStatus()
             _bossinfo = self.getWordBossInfo(now_boss_status["boss_id"])
@@ -2259,7 +2258,6 @@ class DataBase():
             sql = "delete from user_word_boss_status"
             self.cursor.execute(sql)
             self.conn.commit()
-        return result
     
     def getWordlevelList(self,level):
         try:
