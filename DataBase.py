@@ -2025,6 +2025,7 @@ class DataBase():
             print("連線以丟失 重連")
             self.conn = psycopg2.connect(DATABASE_URL, sslmode='require')
             self.cursor = self.conn.cursor()
+        print("創建世界王:")
         current =  datetime.now()
         str_database = (current.strftime("%m/%d/%Y %H:%M:%S"))
         sql = "INSERT INTO word_boss_status(boss_id,start_time,hp) VALUES({boss_id},'{start_time}',{hp})".format(boss_id = boss_id,start_time = str_database,hp = bossinfo["boss_hp"])

@@ -54,7 +54,7 @@ def scheduled_job_WordArmycheck():
     _bossstatus = dataBase.getWordBossStatus()
     if _bossstatus is None:
         print(":SERVER:-- 世界王已消滅 重置")
-        dataBase.startWordBoss(0)
+        dataBase.startWordBoss(1)
     else:
         print(":SERVER:-- 世界王進行遠征軍傷害檢查 -- ")
         if _bossstatus["last_word_army"] is None:
