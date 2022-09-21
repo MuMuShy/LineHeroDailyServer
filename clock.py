@@ -84,7 +84,7 @@ def scheduled_job_Bosscheck():
     _bossstatus = dataBase.getWordBossStatus()
     if _bossstatus is None:
         print(":SERVER:-- 世界王已消滅")
-        #dataBase.startWordBoss(0)
+        dataBase.startWordBoss(1)
     else:
         print(":SERVER:-- 世界王進行傷害check -- ")
         totaldamage =dataBase.getWordBossNowTotalDamage()
