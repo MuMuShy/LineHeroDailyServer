@@ -52,6 +52,7 @@ def scheduled_job_WordArmycheck():
     import math
     dataBase = DataBase()
     _bossstatus = dataBase.getWordBossStatus()
+    print(_bossstatus)
     if _bossstatus is None:
         print(":SERVER:-- 世界王已消滅 重置")
         #dataBase.startWordBoss(1)
